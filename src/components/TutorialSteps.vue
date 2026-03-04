@@ -26,6 +26,7 @@
 </template>
 
 <script lang="ts">
+import App from "@/App.vue";
 import Vue from "vue";
 import { mapStores } from "pinia";
 import { useStore } from "@/store/store";
@@ -35,8 +36,8 @@ import { getTutorialPanelUID } from "@/helpers/editor";
 type TutorialStep = {
     title: string;
     description: string;
+    stencil?: string;
 };
-
 export default Vue.extend({
     name: "TutorialSteps",
     computed: {
@@ -71,7 +72,7 @@ export default Vue.extend({
         currentStep(): TutorialStep {
             return this.steps[this.currentIndex] ?? { title: "", description: "" };
         },
-        
+
         tutorialPanelUID(): string {
             return getTutorialPanelUID();
         },
@@ -88,6 +89,15 @@ export default Vue.extend({
         steps(): void {
             this.currentIndex = 0;
         },
+        currentIndex(): void {
+            // Apply stencil when curent step has changed
+            this.applyStencilForCurrentStep();
+        },
+    },
+
+    mounted() {
+        // Apply stencil for the initial step when initially loading tutorial
+        this.applyStencilForCurrentStep();
     },
 
     methods: {
@@ -105,6 +115,20 @@ export default Vue.extend({
 
         goTo(i: number): void {
             this.currentIndex = i;
+        },
+        
+        applyStencilForCurrentStep(): void {
+            
+            const rootApp = (this.$root.$children[0] as InstanceType<typeof App>);
+
+            if (this.currentStep && this.currentStep.stencil) {
+                try {
+                    rootApp.applyStencil(this.currentStep.stencil); 
+                }
+                catch (e) {
+                    console.error("Error applying stencil:", e);
+                }
+            }
         },
     },
 });

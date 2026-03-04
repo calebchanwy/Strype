@@ -1565,6 +1565,7 @@ export default Vue.extend({
 
             this.$root.$emit("bv::show::modal", "editSoundDlg");
         },
+
         /**  Applies a stencil effect to highlight the supplied UI component, dimming all other parts of the user interface */
         applyStencil(uiComponent: string): void{
 
@@ -1580,12 +1581,45 @@ export default Vue.extend({
             allUIComponents.set("pea", document.getElementById(getPEAComponentRefId()));
 
             // Find matching HTML component
-            var component = allUIComponents.get(uiComponent);
+            var component = allUIComponents.get(uiComponent) as HTMLElement | null;
             if (component) {
-                // Dim all other components and highlight the target component by applying CSS classes
+
+                // Clean up any existing stencil
+                this.clearStencil();
+
+                // Add overlay that dims the whole UI
+                const overlay = document.createElement("div");
+                overlay.id = "strype-stencil-overlay";
+                overlay.className = "stencil-overlay";
+                document.body.appendChild(overlay);
+
+                // Add event listener on the overlay itself clears the stencil when clicked on
+                overlay.addEventListener("click", () => {
+                    this.clearStencil();
+                });
+    
+                // Highlight components above the overlay
+                var highlightedElements: HTMLElement[] = [];
+                highlightedElements.push(component);
+                highlightedElements.push(allUIComponents.get("tutorial")); // we include the tutorial panel, so this is always visible
+
+                for (var el of highlightedElements) {
+                    el.classList.add("stencil-highlight");
+                    el.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+                }
             }
 
 
+        },
+
+        /**  Clears any existing stencils so that all U.I. elements are visible*/
+        clearStencil(): void {
+            const overlay = document.getElementById("strype-stencil-overlay");
+            if (overlay) {
+                overlay.remove();
+            }
+            const highlighted = document.querySelectorAll(".stencil-highlight");
+            highlighted.forEach((el) => el.classList.remove("stencil-highlight"));
         },
     },
 
@@ -1644,6 +1678,25 @@ body.#{$strype-classname-dragging-frame} {
     position: absolute;
     left: 0px;
     z-index: 500;
+}
+
+.stencil-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 900;
+}
+
+.stencil-highlight {
+    position: relative !important;
+    z-index: 1001 !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6) !important;
+    border-radius: 4px;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+    pointer-events: auto !important;
 }
 
 .app-progress-pane {
