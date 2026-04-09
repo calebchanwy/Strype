@@ -1,5 +1,5 @@
 #(=> Strype:1:std
-'''A hello world tutorial'''
+'''A hello world tutorial (onboarding)'''
 #(=> Section:Tutorial
 expectedOutput: "Hello, world!"
 expectedOutputMessage: "Great start! Output matches the expected result!"
@@ -7,6 +7,8 @@ steps:
 - title: "Hello"
   description: "Print Hello, world! to the console."
   stencil: mainCode
+  requiredComponents:
+    funccall: 1
 #(=> Section:Imports
 #(=> Section:Definitions
 #(=> Section:Main
