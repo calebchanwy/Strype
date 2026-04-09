@@ -536,8 +536,9 @@ export function getMainUIElements(): Map<string, HTMLElement> {
         ["imports", document.getElementById(getFrameContainerUID(useStore().getImportsFrameContainerId)) as HTMLElement],
         ["definitions", document.getElementById(getFrameContainerUID(useStore().getDefsFrameContainerId)) as HTMLElement],
         ["mainCode", document.getElementById(getCodeEditorUID()) as HTMLElement],
-        ["commands", document.getElementById(getCommandsRightPaneContainerId()) as HTMLElement],
+        ["commands", document.getElementById(getCommandsContainerUID()) as HTMLElement],
         ["pea", document.getElementById(getPEAComponentRefId()) as HTMLElement],
+        ["editor", document.getElementById(getEditorID()) as HTMLElement],
     ]);
     return allUIComponents;
 }

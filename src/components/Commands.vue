@@ -1063,7 +1063,6 @@ export default Vue.extend({
 .commands-tab {
     color: #787978 !important;
     border-color: #bbc8b6 !important;
-    background-color: transparent !important;
     margin-top: 10px;
 }
 
