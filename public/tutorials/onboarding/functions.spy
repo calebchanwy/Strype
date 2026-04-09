@@ -1,0 +1,16 @@
+#(=> Strype:1:std
+'''Define and call a function'''
+#(=> Section:Tutorial
+expectedOutput: "Hello from f!"
+expectedOutputMessage: "Nice — function definition and call succeeded!"
+steps:
+- title: "Define function"
+  description: "Define a function `f()` that prints a message, then call it from main."
+  stencil: mainCode
+  requiredComponents:
+    funcdef: 1
+    funccall: 1
+#(=> Section:Imports
+#(=> Section:Definitions
+#(=> Section:Main
+#(=> Section:End

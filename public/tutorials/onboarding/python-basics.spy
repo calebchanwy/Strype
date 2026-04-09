@@ -1,0 +1,16 @@
+#(=> Strype:1:std
+'''Variables and printing'''
+#(=> Section:Tutorial
+expectedOutput: "42"
+expectedOutputMessage: "Nice — variable assignment and print worked!"
+steps:
+- title: "Create variable"
+  description: "Assign a number to a variable and print it."
+  stencil: mainCode
+  requiredComponents:
+    varassign: 1
+    funccall: 1
+#(=> Section:Imports
+#(=> Section:Definitions
+#(=> Section:Main
+#(=> Section:End

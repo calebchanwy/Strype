@@ -1,14 +1,24 @@
+- name: Strype Walkthrough
+  description: A tour of Strype's main UI elements.
+  image: favicon.png
+  file: walkthrough.spy
+
 - name: An Introduction To Frames
   description: How to insert, delete and update frames.
   image: favicon.png
-  file: console-ngg.spy
+  file: frame-introduction.spy
 
-- name: The Context Menu
-  description: How to use the context menu to insert, delete and update frames.
+- name: Keyboard Commands
+  description: How to use keyboard shortcuts to insert, delete and update frames.
   image: favicon.png
-  file: console-ngg.spy
+  file: keyboard-commands.spy
 
-- name: Code Completion
-  description: How to use Strype's inbuilt code completion.
+- name: Using the Console
+  description: How to use Strype's console to run Python code and interact with your design.
   image: favicon.png
-  file: console-ngg.spy
+  file: console.spy
+
+- name: Python Basics
+  description: New to Python and coding? This tutorial introduces the basic Python concepts.
+  image: favicon.png
+  file: python-basics.spy
