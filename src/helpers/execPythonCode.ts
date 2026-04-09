@@ -184,16 +184,20 @@ export function execPythonCode(aConsoleTextArea: HTMLTextAreaElement, aTurtleDiv
                 const a = actual.trim();
                 const e = expected.trim();
                 if ((e.length > 0) && (a === e || a.endsWith(e))) {
-                    // mark reached and show modal
+                    // Expected output reached, show success message.
                     useStore().expectedOutcomeReached = true;
-                    useStore().simpleModalDlgMsg = useStore().expectedOutputMessage ?? (i18n.t("tutorials.successReached") as string) ?? "Success!";
-                    // Show application simple modal dialog
-                    try {
-                        vm.$root.$emit("bv::show::modal", getAppSimpleMsgDlgId());
-                    }
-                    catch (e) {
-                        console.log("Error when showing expected output reached modal: " + e);
-                    }
+                    useStore().simpleModalDlgMsg = useStore().expectedOutputMessage ?? "Success!";     
+                }
+                else{
+                    // Did not reach expected output, show failure message to user.
+                    useStore().expectedOutcomeReached = false;
+                    useStore().simpleModalDlgMsg = "Failed to reach expected output, try again!";
+                }
+                try {
+                    vm.$root.$emit("bv::show::modal", getAppSimpleMsgDlgId());
+                }
+                catch (e) {
+                    console.log("Error when showing modal: " + e);
                 }
             }
         }
