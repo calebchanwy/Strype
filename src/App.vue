@@ -1727,6 +1727,17 @@ body.#{$strype-classname-dragging-frame} {
     pointer-events: auto !important;
 }
 
+// Ensure backgrounds are filled for components when highlighted
+#menu-bar.stencil-highlight,
+#editor.stencil-highlight,
+[id^="frameHeader_"].stencil-highlight {
+    background: #bbc6b6;
+}
+
+#editorCommands.stencil-highlight{
+    background: #ecf0f1;
+}
+
 .app-progress-pane {
     background-color: rgba($color: gray, $alpha: 0.7);
 }

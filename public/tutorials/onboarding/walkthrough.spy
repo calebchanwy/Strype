@@ -4,6 +4,9 @@
 expectedOutput: ""
 expectedOutputMessage:
 steps:
+- title: "Main Editor"
+  description: "This is the main code editor"
+  stencil: editor
 - title: "Menu"
   description: "The left-hand menu opens projects, tutorials, and cloud drive options. Use it to load or save projects and access built-in tutorials."
   stencil: menu
@@ -19,8 +22,8 @@ steps:
 - title: "Definitions Section"
   description: "Put function and class definitions in this section so they are available to the main code."
   stencil: definitions
-- title: "Main Code Editor"
-  description: "This is the main code area where you create the program flow. Add statements and function calls here."
+- title: "Main Code Section"
+  description: "This is the main code and the entrypoint for your programs."
   stencil: mainCode
 - title: "Commands & Python Exec Area"
   description: "The right-hand pane hosts command buttons and the Python Execution Area (PEA). Use it to run code, see outputs, and interact with the simulator."
