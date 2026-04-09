@@ -1,0 +1,25 @@
+#(=> Strype:1:std
+'''Using Commands to create frames'''
+#(=> Section:Tutorial
+expectedOutput: ""
+expectedOutputMessage: "Good — you used the Commands to create frames!"
+steps:
+- title: "Open Commands Panel"
+  description: "Open the right-hand Commands panel to access buttons for inserting frames (Import, Definition, Frame)."
+  stencil: commands
+- title: "Insert an Import Frame"
+  description: "Use the 'Insert Import' command to add an import frame. Verify it appears in the Imports section."
+  stencil: imports
+- title: "Insert a Definition Frame"
+  description: "Use the 'Insert Definition' command to add a function or class frame into Definitions."
+  stencil: definitions
+- title: "Insert a Main Frame"
+  description: "Use the 'Insert Frame' command to add a frame into the main code area. Edit its content and run to see the effect."
+  stencil: mainCode
+- title: "Remove or Reorder Frames"
+  description: "Use frame controls (delete, move up/down) in the frame header or the Commands panel to remove or reorder frames."
+  stencil: mainCode
+#(=> Section:Imports
+#(=> Section:Definitions
+#(=> Section:Main
+#(=> Section:End

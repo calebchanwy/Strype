@@ -1,0 +1,21 @@
+#(=> Strype:1:std
+'''Introduction to frames: inserting, deleting, editing'''
+#(=> Section:Tutorial
+steps:
+- title: "Insert a Frame"
+  description: "Use the context menu or the Add Frame commands to insert a new statement frame into the editor. Try adding a `print` call in the main code area."
+  stencil: mainCode
+  requiredComponents:
+    funccall: 1
+
+- title: "Delete a Frame"
+  description: "Select a frame and use the context menu delete action (or press Backspace) to remove it."
+  stencil: mainCode
+
+- title: "Edit Frame Content"
+  description: "Click a label slot to edit its text. Use autocomplete to help complete function names and arguments."
+  stencil: mainCode
+#(=> Section:Imports
+#(=> Section:Definitions
+#(=> Section:Main
+#(=> Section:End
