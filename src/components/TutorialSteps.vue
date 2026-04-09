@@ -246,9 +246,10 @@ export default Vue.extend({
             // Firstly clear any existing stencil
             rootApp.clearStencil();
 
-            if (this.currentStep && this.currentStep.stencil != "") {
+            const stencil = this.currentStep?.stencil;
+            if (typeof stencil === "string" && stencil.trim() !== "") {
                 try {
-                    rootApp.applyStencil(this.currentStep.stencil); 
+                    rootApp.applyStencil(stencil);
                 }
                 catch (e) {
                     console.error("Error applying stencil:", e);
