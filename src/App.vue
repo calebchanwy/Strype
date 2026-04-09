@@ -16,6 +16,7 @@
                 </div>
             </div>
         </div>
+            <div v-show="showStencil" :id="stencilId" class="stencil-overlay" @click.self="clearStencil"></div>
         /* IFTRUE_isPython
         <Splitpanes class="expanded-PEA-splitter-overlay strype-split-theme" v-show="isExpandedPythonExecArea" horizontal @resize=onExpandedPythonExecAreaSplitPaneResize>
             <pane key="1" :size="100 - expandedPEAOverlaySplitterPane2Size">
@@ -198,6 +199,7 @@ export default Vue.extend({
             imgToEditInDialog: "",
             soundToEditInDialog: null as AudioBuffer | null,
             showImgPreview: (() => {}) as (dataURL: string) => void,
+            showStencil: false,
         };
     },
 
@@ -356,6 +358,10 @@ export default Vue.extend({
 
         getCompanionDndCanvasId(): string {
             return getCompanionDndCanvasId();
+        },
+
+        stencilId(): string {
+            return getStencilOverlayUID();
         },
     },
 
@@ -1586,64 +1592,56 @@ export default Vue.extend({
             this.$root.$emit("bv::show::modal", "editSoundDlg");
         },
 
-        /**  Applies a stencil effect to highlight the supplied UI component, dimming all other parts of the user interface */
-        applyStencil(uiComponent: string): void{
+        /**  Applies a stencil effect to highlight the supplied components, dimming all other parts of the user interface */
+        applyStencil(components: string | undefined): void{
+            components = components ?? "";
 
-            // Find matching HTML component
-            const components = getMainUIElements() as Map<string, HTMLElement>;
-            const component = components.get(uiComponent) as HTMLElement;
-            if (component) {
+            const allComponents = getMainUIElements() as Map<string, HTMLElement>;
+            // Highlight components above the overlay
+            const highlightedElements: HTMLElement[] = [];
 
-                // Add overlay adds a dim affect on whole UI
-                const overlay = document.createElement("div");
-                overlay.id = getStencilOverlayUID();
-                overlay.className = "stencil-overlay";
-                document.body.appendChild(overlay);
-
-                // Add a click handler on the document to clear the stencil when clicking outside of the highlighted component
-                (this as any)._stencilDocClickHandler = (event: MouseEvent) => {
-                    const target =  event.target as HTMLElement | null;
-                    if (!target) {
-                        return;
-                    }
-                    // If the click wasn't inside any highlighted element, clear the stencil
-                    if (!target.closest || !target.closest(".stencil-highlight")) {
-                        this.clearStencil();
-                    }
-                };
-
-                document.addEventListener("click", (this as any)._stencilDocClickHandler, true);
-    
-                // Highlight components above the overlay
-                const highlightedElements: HTMLElement[] = [];
-                highlightedElements.push(component);          
-
-                const tutorialEl = components.get("tutorial"); // we include the tutorial panel, so this is always visible
-                if (tutorialEl) {
-                    highlightedElements.push(tutorialEl);               
-                }
-                for (var el of highlightedElements) {
-                    el.classList.add("stencil-highlight");
-                    el.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
-                }
+            // By default, include the tutorial panel, so this is always visible
+            const tutorialPanel = allComponents.get("tutorial"); 
+            if (tutorialPanel) {
+                highlightedElements.push(tutorialPanel);               
             }
+            // Split string and add each component to be highlighted
+            if (components.trim() === "") {
+                return;
+            }
+            components.trim().replaceAll(" ", "").split(",").forEach((component) => {
+                if(!allComponents.has(component)){
+                    console.warn("Trying to apply a stencil on component " + component + " but it does not exist in the main UI elements map.");
+                }
+                else{
+                    const element = allComponents.get(component) as HTMLElement;
+                    if (element) {
+                        highlightedElements.push(element);
+                    }
+                }
+            });
 
+            // Add each element to be highlighted
+            for (var element of highlightedElements) {
+                element.classList.add("stencil-highlight");
+            }
+            this.showStencil = true;
+            // Ensure overlay is active (remove inactive class if previously set)
+            const overlayEl = document.getElementById(this.stencilId as unknown as string);
+            if (overlayEl) {
+                overlayEl.classList.remove("stencil-overlay-inactive");
+            }
 
         },
 
         /**  Clears any existing stencils so that all U.I. elements are visible*/
         clearStencil(): void {
-            const overlay = document.getElementById(getStencilOverlayUID());
-            if (overlay) {
-                overlay.remove();
-            }
-            // Remove the document click handler if present
-            if ((this as any)._stencilDocClickHandler) {
-                document.removeEventListener("click", (this as any)._stencilDocClickHandler, true);
-                (this as any)._stencilDocClickHandler = undefined;
-            }
             const highlighted = document.querySelectorAll(".stencil-highlight");
             highlighted.forEach((el) => el.classList.remove("stencil-highlight"));
+            const overlayEl = document.getElementById(this.stencilId);
+            if (overlayEl) {
+                overlayEl.classList.add("stencil-overlay-inactive");
+            }
         },
     },
 
@@ -1712,8 +1710,13 @@ body.#{$strype-classname-dragging-frame} {
     bottom: 0;
     background: rgba(0,0,0,0.5);
     z-index: 1000;
-    pointer-events: none; // allow mouse wheel and pointer events to pass through
+    pointer-events: auto;
 }
+.stencil-overlay-inactive {
+    z-index: -1 !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+}   
 
 .stencil-highlight {
     position: relative;
