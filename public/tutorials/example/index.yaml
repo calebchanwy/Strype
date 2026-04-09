@@ -1,3 +1,8 @@
+- name: Hello World!
+  description: A simple hello world program
+  image: hello-world.jpg
+  file: hello-world.spy
+  
 - name: Number Guessing Game
   description: A number guessing game
   image: console-ngg.png
@@ -8,12 +13,4 @@
   image: console-rps.png
   file: console-rps.spy
 
-- name: Hello World!
-  description: A simple hello world program
-  image: console-hello.png
-  file: console-hello.spy
 
-- name: Structure Test
-  description: Structure Test
-  image: console-hello.png
-  file: components-example.spy
