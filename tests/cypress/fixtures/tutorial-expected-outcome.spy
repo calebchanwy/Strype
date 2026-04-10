@@ -1,0 +1,19 @@
+#(=> Strype:1:std
+'''An example tutorial with an expected outcome'''
+#(=> Section:Tutorial
+expectedOutput: "Hello world!"
+expectedOutputMessage: Congratulations, you have finished the project!
+steps:
+- title: "Welcome!"
+  description: "This is a tutorial on Strype"
+- title: "First Steps"
+  description: "Use your keyboard to create a frame, we are looking for a function call!"
+- title: "Insert string"
+  description: "Insert the string \"Hello world!\" in the frame, to be printed"
+- title: "Run the project"
+  description: "Use the console to run your project"
+#(=> Section:Imports
+#(=> Section:Definitions
+#(=> Section:Main
+print("Hello world!") 
+#(=> Section:End

@@ -1,0 +1,77 @@
+#(=> Strype:1:std
+'''An example tutorial exercising many frame/component types'''
+#(=> Section:Tutorial
+steps:
+- title: "Import library"
+  description: "Import the `math` module."
+  stencil: imports
+  requiredComponents:
+    import: 1
+- title: "From-import"
+  description: "Import a symbol from a module (e.g. `from math import sqrt`)."
+  stencil: imports
+  requiredComponents:
+    from-import: 1
+- title: "Create variable"
+  description: "Assign a number to a variable and print it."
+  stencil: mainCode
+  requiredComponents:
+    varassign: 1
+    funccall: 1
+- title: "Function definition"
+  description: "Define a function using `def`."
+  stencil: definitions
+  requiredComponents:
+    funcdef: 1
+- title: "Class definition"
+  description: "Define a simple class."
+  stencil: definitions
+  requiredComponents:
+    classdef: 1
+- title: "If statement"
+  description: "Add a conditional `if` statement."
+  stencil: mainCode
+  requiredComponents:
+    if: 1
+- title: "For loop with break/continue"
+  description: "Create a `for` loop and use `break` and `continue`."
+  stencil: mainCode
+  requiredComponents:
+    for: 1
+    break: 1
+    continue: 1
+- title: "While loop"
+  description: "Create a `while` loop."
+  stencil: mainCode
+  requiredComponents:
+    while: 1
+- title: "Try / Raise / Except"
+  description: "Use `try` / `raise` / `except`."
+  stencil: mainCode
+  requiredComponents:
+    try: 1
+    raise: 1
+- title: "With statement"
+  description: "Use a `with` statement (context manager)."
+  stencil: mainCode
+  requiredComponents:
+    with: 1
+- title: "Return statement"
+  description: "Include a `return` inside a function."
+  stencil: definitions
+  requiredComponents:
+    return: 1
+- title: "Global declaration"
+  description: "Demonstrate the `global` declaration inside a function."
+  stencil: definitions
+  requiredComponents:
+    global: 1
+- title: "Comment"
+  description: "Include a comment line."
+  stencil: tutorial
+  requiredComponents:
+    comment: 1
+#(=> Section:Imports
+#(=> Section:Definitions
+#(=> Section:Main
+#(=> Section:End
