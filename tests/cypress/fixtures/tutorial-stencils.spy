@@ -1,12 +1,7 @@
 #(=> Strype:1:std
-'''Walkthrough: Strype UI Tour'''
+'''An example tutorial using stencils '''
 #(=> Section:Tutorial
-expectedOutput: ""
-expectedOutputMessage:
 steps:
-- title: "Welcome to Strype!"
-  description: "Follow this tutorial to get yourself familiar with Strype"
-  stencil: tutorials
 - title: "Main Editor"
   description: "This is the main code editor"
   stencil: editor
@@ -29,10 +24,10 @@ steps:
   description: "This is the main code and the entrypoint for your programs."
   stencil: mainCode
 - title: "Commands & Python Exec Area"
-  description: "The right-hand pane hosts command buttons and the Python Execution Area (PEA). Use it to run code, see outputs, and interact with the simulator."
+  description: "The right-hand pane hosts command buttons and the Python Execution Area (PEA). Use it to run code, see outputs, and interact with the console/turtle."
   stencil: commands
 - title: "Python Execution Area"
-  description: "The PEA shows output, errors, and simulator controls (when available). Use it to run and test your program."
+  description: "The PEA shows output, errors, and turtle controls (when available). Use it to run and test your program."
   stencil: pea
 #(=> Section:Imports
 #(=> Section:Definitions

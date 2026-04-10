@@ -318,3 +318,26 @@ describe("Tests loading/saving project with freezing and folding", () => {
     });
 });
 
+describe("Tests loading/saving projects with instructional steps", () => {
+    it("Loads/saves a project with instructional steps", () => {
+        testRoundTripImportAndDownload("tests/cypress/fixtures/tutorial-instructional-steps.spy");
+    });
+});
+
+describe("Tests loading/saving projects with expected outcome", () => {
+    it("Loads/saves a project with an expected outcome and message", () => {
+        testRoundTripImportAndDownload("tests/cypress/fixtures/tutorial-expected-outcome.spy");
+    });
+});
+
+describe("Tests loading/saving projects with stencils", () => {
+    it("Loads/saves a project with stencils", () => {
+        testRoundTripImportAndDownload("tests/cypress/fixtures/tutorial-stencils.spy");
+    });
+});
+
+describe("Tests loading/saving projects with required components", () => {
+    it("Loads/saves a project with required components", () => {
+        testRoundTripImportAndDownload("tests/cypress/fixtures/tutorial-required-components.spy");
+    });
+});

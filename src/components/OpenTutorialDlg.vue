@@ -19,7 +19,7 @@
                     <span class="tutorial-dlg-tutorial-group-type" v-if="item.type">{{item.type}}</span>
                     {{ item.name }}
                 </b-list-group-item>
-                <b-list-group-item @click="openLoadProjectModal" button> {{$t('tutorials.openProject')}} </b-list-group-item>
+                <b-list-group-item id="load-tutorial-btn" @click="openLoadProjectModal" button> {{$t('tutorials.openProject')}} </b-list-group-item>
             </b-list-group>
             <!-- Right Pane: Dynamic Grid -->
             <div class="flex-grow-1 p-3 overflow-auto">
