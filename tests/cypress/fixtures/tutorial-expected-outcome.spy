@@ -2,7 +2,7 @@
 '''An example tutorial with an expected outcome'''
 #(=> Section:Tutorial
 expectedOutput: "Hello world!"
-expectedOutputMessage: Congratulations, you have finished the project!
+expectedOutputMessage: "Congratulations, you have finished the project!"
 steps:
 - title: "Welcome!"
   description: "This is a tutorial on Strype"
@@ -15,5 +15,4 @@ steps:
 #(=> Section:Imports
 #(=> Section:Definitions
 #(=> Section:Main
-print("Hello world!") 
 #(=> Section:End

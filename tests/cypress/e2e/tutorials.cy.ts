@@ -220,3 +220,41 @@ describe("Clicking on stencil overlay dismisses stencil", () => {
         cy.get(".stencil-highlight").should("have.length", 0);
     });
 });
+
+describe("Reaching expected outcome in tutorial shows message", () => {
+    it("Shows expected outcome message when the expected outcome is reached", () => {
+        if (Cypress.env("mode") == "microbit") {
+            return;
+        }
+        // Load the expected outcome fixture
+        loadTutorialFile("tests/cypress/fixtures/tutorial-expected-outcome.spy");
+        cy.wait(500);
+        // Add print statement that matches the expected outcome using keyboard input
+        cy.get("body").type("{downarrow}{downarrow}p'Hello world!'{downarrow}{downarrow}");
+        // Run the code
+        cy.contains("#runButton", "Run").click();
+        // Check the expected outcome message is shown
+        cy.contains("#appSimpleMsgModalDlg", "Congratulations, you have finished the project!").should("exist");
+        cy.contains(".btn", "OK").click();
+        // Check the message is dismissed
+        cy.contains("#appSimpleMsgModalDlg").should("not.exist");
+    });
+});
+
+describe("Not reaching expected outcome in tutorial shows failure message", () => {
+    it("Shows failure message when expected outcome isn't reached.", () => {
+        if (Cypress.env("mode") == "microbit") {
+            return;
+        }
+        // Load the expected outcome fixture with a short timeout
+        loadTutorialFile("tests/cypress/fixtures/tutorial-expected-outcome.spy");
+        cy.wait(500);
+        // Run the code without adding the expected print statement
+        cy.contains("#runButton", "Run").click();
+        // Check the expected outcome message is shown
+        cy.contains("#appSimpleMsgModalDlg", i18n.t("tutorials.expectedOutcomeNotReached") as string).should("exist");
+        cy.contains(".btn", "OK").click();
+        // Check the message is dismissed
+        cy.contains("#appSimpleMsgModalDlg").should("not.exist");
+    });
+});
