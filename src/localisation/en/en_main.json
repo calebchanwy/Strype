@@ -286,7 +286,8 @@
     "requiredComponentsTitle": "Required components:",
     "missingComponents": "You are missing some components. See the list above for what is left to do.",
     "nextStepError": "You must code the required components before moving to the next step.",
-    "openProject" : "Open project"
+    "openProject" : "Open project",
+    "expectedOutcomeNotReached": "Failed to reach expected output, try again!"
   },
   "shortcut": {
     "delete": "Delete",

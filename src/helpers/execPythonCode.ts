@@ -191,7 +191,7 @@ export function execPythonCode(aConsoleTextArea: HTMLTextAreaElement, aTurtleDiv
                 else{
                     // Did not reach expected output, show failure message to user.
                     useStore().expectedOutcomeReached = false;
-                    useStore().simpleModalDlgMsg = "Failed to reach expected output, try again!";
+                    useStore().simpleModalDlgMsg = i18n.t("tutorials.expectedOutcomeNotReached") as string;
                 }
                 try {
                     vm.$root.$emit("bv::show::modal", getAppSimpleMsgDlgId());
