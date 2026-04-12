@@ -7,37 +7,55 @@
         </div>
         <div class="tutorial-step-list">
             <button class="tutorial-steps-list-btn btn btn-outline-secondary rounded-circle d-inline-flex align-items-center justify-content-center p-0 m-1"
-                v-for="(s, i) in steps"
-                :key="i"
-                :class="{ active: i === currentIndex }"
-                :disabled="(i > currentIndex + 1) || (i === currentIndex + 1 && !requiredComponentsReached)"
-                @click="goTo(i)">
-                {{ i + 1 }}
+                v-for="(step, index) in steps"
+                :key="index"
+                :class="{ active: index === currentIndex }"
+                :disabled="(index > currentIndex + 1) || (index === currentIndex + 1 && !requiredComponentsReached)"
+                @click="goTo(index)">
+                {{ index + 1 }}
             </button>
         </div>
-        <div class="tutorial-step-body">
-            <div class="tutorial-step-title bold">{{ currentStep.title }}</div>
-            <div class="tutorial-step-desc" v-html="currentStep.description"></div>
-        </div>
-        <div class="tutorial-step-counts mb-2" v-if="requiredComponentsList && requiredComponentsList.length">
-            <div class="counts-title bold mb-2">{{ $t("tutorials.requiredComponentsTitle") }}</div>
-            <ul class="list-group">
-                <li v-for="component in requiredComponentsList" :key="component.type" :class="['list-group-item', { 'list-group-item-success': component.met }]" class="d-flex justify-content-between p-2 align-items-center">
-                    <div>
-                        <div class="component-description">{{ component.description || component.type }}</div>
-                    </div>
-                    <span class="badge badge-primary badge-pill">{{ component.actual }} / {{ component.required }}</span>
-                </li>
-            </ul>
-        </div>
-        <div class="tutorial-step-message alert alert-warning p-2 mb-2" role="alert" v-if="componentMessage">
-            {{ componentMessage }}
-        </div>
-        <div class="tutorial-nav">
-            <button type="button" class="btn btn-secondary" @click="prevStep" :disabled="currentIndex <= 0">Prev</button>
-            <button type="button" class="btn btn-primary ml-2" @click="nextStep" :disabled="(currentIndex < steps.length - 1 && !requiredComponentsReached)">
-                {{ currentIndex === steps.length - 1 ? 'Finish' : 'Next' }}
-            </button>
+        <div class="tutorial-main-row row g-3">
+            <div v-if="currentMedia" class="col-md-5 d-flex align-items-center justify-content-center">
+                <div v-if="isImage" class="w-100 d-flex align-items-center justify-content-center">
+                    <img :src="currentMedia" class="img-fluid mx-auto d-block" />
+                </div>
+                <div v-else-if="isVideo" class="w-100 embed-responsive embed-responsive-16by9">
+                    <video :src="source" class="embed-responsive-item" autoplay></video>
+                </div>
+                <div v-else-if="youtubeEmbedUrl" class="w-100 embed-responsive embed-responsive-16by9">
+                    <iframe :src="source" class="embed-responsive-item" frameborder="0" allow="autoplay"></iframe>
+                </div>
+                <div v-else-if="source" class="w-100 embed-responsive embed-responsive-16by9">
+                    <iframe :src="source" class="embed-responsive-item" frameborder="0" allow="autoplay"></iframe>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="tutorial-step-body">
+                    <div class="tutorial-step-title bold">{{ currentStep.title }}</div>
+                    <div class="tutorial-step-desc" v-html="currentStep.description"></div>
+                </div>
+                <div class="tutorial-step-counts mb-2" v-if="requiredComponentsList && requiredComponentsList.length">
+                    <div class="counts-title bold mb-2">{{ $t("tutorials.requiredComponentsTitle") }}</div>
+                    <ul class="list-group">
+                        <li v-for="component in requiredComponentsList" :key="component.type" :class="['list-group-item', { 'list-group-item-success': component.met }]" class="d-flex justify-content-between p-2 align-items-center">
+                            <div>
+                                <div class="component-description">{{ component.description || component.type }}</div>
+                            </div>
+                            <span class="badge badge-primary badge-pill">{{ component.actual }} / {{ component.required }}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tutorial-step-message alert alert-warning p-2 mb-2" role="alert" v-if="componentMessage">
+                    {{ componentMessage }}
+                </div>
+                <div class="tutorial-nav">
+                    <button type="button" class="btn btn-secondary" @click="prevStep" :disabled="currentIndex <= 0">Prev</button>
+                    <button type="button" class="btn btn-primary ml-2" @click="nextStep" :disabled="(currentIndex < steps.length - 1 && !requiredComponentsReached)">
+                        {{ currentIndex === steps.length - 1 ? 'Finish' : 'Next' }}
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -55,6 +73,7 @@ type TutorialStep = {
     title: string;
     description: string;
     stencil: string;
+    media?: string;
     requiredComponents?: Record<string, number>;
 };
 export default Vue.extend({
@@ -94,6 +113,59 @@ export default Vue.extend({
 
         tutorialPanelUID(): string {
             return getTutorialPanelUID();
+        },
+
+        currentMedia(): string | null {
+            const m = (this.currentStep && (this.currentStep as any).media) || null;
+            return m && typeof m === "string" && m.trim() !== "" ? m.trim() : null;
+        },
+        isImage(): boolean {
+            const url = this.currentMedia;
+            return !!(url && url.match(/\.(png|jpe?g|gif|svg|webp)(\?.*)?$/i));
+        },
+        isVideo(): boolean {
+            const url = this.currentMedia;
+            return !!(url && url.match(/\.(mp4|webm|ogg)(\?.*)?$/i));
+        },
+        /** Returns the YouTube embed URL if the current media is a YouTube URL */
+        youtubeEmbedUrl(): string | null {
+            if (!this.currentMedia) {
+                return null;
+            }
+            try {
+                const url = new URL(this.currentMedia as string, window.location.origin);
+                if (url.hostname.includes("youtu.be")) {
+                    // For shortened YouTube URLs, the video ID is in the pathname
+                    const id = url.pathname.slice(1);
+                    if (id) {
+                        return "https://www.youtube.com/embed/" + id + "?autoplay=1";
+                    }
+                }
+                if (url.hostname.includes("youtube.com") || url.hostname.includes("youtube.com")) {
+                    // Retrieve video ID from v= parameter for standard YouTube URLs
+                    const id = url.searchParams.get("v");
+                    if (id) {
+                        return "https://www.youtube.com/embed/" + id + "?autoplay=1";
+                    }
+                }
+            }
+            catch (e) {
+                console.warn("Invalid URL:", this.currentMedia, e);
+            }
+            return null;
+        },
+        source(): string | null {
+            if (this.youtubeEmbedUrl) {
+                return this.youtubeEmbedUrl;
+            }
+            if (this.isVideo) {
+                return this.currentMedia;
+            }
+            if (this.currentMedia) {
+                return this.currentMedia;
+            }
+            console.warn("Unsupported media type or invalid URL:", this.currentMedia);
+            return null;
         },
     },
 

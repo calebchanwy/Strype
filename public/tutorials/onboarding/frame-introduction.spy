@@ -2,18 +2,22 @@
 '''Introduction to frames: inserting, deleting, editing'''
 #(=> Section:Tutorial
 steps:
+- title: "All about Frames!"
+  description: "Follow this quick tutorial to learn about how to manipulate frames in Strype"
+  stencil: tutorial
+  media: https://strype.org/images/editor_snapshot.png
 - title: "Insert a Frame"
   description: "Use the context menu or the Add Frame commands to insert a new statement frame into the editor. Try adding a `print` call in the main code area."
-  stencil: mainCode
+  stencil: mainCode, commands
   requiredComponents:
     funccall: 1
-
-- title: "Delete a Frame"
-  description: "Select a frame and use the context menu delete action (or press Backspace) to remove it."
+  media: https://www.youtube.com/watch?v=9NPulhoXxmk
+- title: "Moving Frames"
+  description: "Use your mouse to drag and drop frames between sections of your code, or hold shift + arrow keys to move frames. Alternatively, use the context menu or keyboard shortcuts to copy and paste frames."
   stencil: mainCode
-
-- title: "Edit Frame Content"
-  description: "Click a label slot to edit its text. Use autocomplete to help complete function names and arguments."
+  media: https://www.youtube.com/watch?v=yT4Aryq07EA&list=PLOTfsa8X9FM6HeT2zj8ZKNO9T-YSqBaF4&index=3
+- title: "Editing a frame"
+  description: "Use your arrow keys or your mouse to navigate into a frame's slot to edit it's content"
   stencil: mainCode
 #(=> Section:Imports
 #(=> Section:Definitions
