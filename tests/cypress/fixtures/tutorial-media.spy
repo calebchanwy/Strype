@@ -1,0 +1,23 @@
+#(=> Strype:1:std
+'''An example tutorial with different types of media'''
+#(=> Section:Tutorial
+steps:
+- title: "Embedded image"
+  description: "Here is an image"
+  media: https://strype.org/images/editor_snapshot.png
+- title: "Embedded Video"
+  description: "Here is a video"
+  media: https://www.w3schools.com/html/mov_bbb.mp4
+- title: "Non-embedded YouTube Video"
+  description: "Here is an embedded YouTube video "
+  media: https://youtu.be/xTBnZwv9LBk?si=OPQbtOQU21-BvNxG
+- title: "Embedded youtube.com Video"
+  description: "Here is an embedded YouTube video "
+  media: https://www.youtube.com/embed/xTBnZwv9LBk?si=hUQWQq-zW8EUnfiE
+- title: "Other Embeds"
+  description: "Here is different types of embeds"
+  media: https://www.example.com
+#(=> Section:Imports
+#(=> Section:Definitions
+#(=> Section:Main
+#(=> Section:End

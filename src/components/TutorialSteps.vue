@@ -16,7 +16,7 @@
             </button>
         </div>
         <div class="tutorial-main-row row g-3">
-            <div v-if="currentMedia" class="col-md-5 d-flex align-items-center justify-content-center">
+            <div id="tutorial-media" v-if="currentMedia" class="col-md-5 d-flex align-items-center justify-content-center">
                 <div v-if="isImage" class="w-100 d-flex align-items-center justify-content-center">
                     <img :src="currentMedia" class="img-fluid mx-auto d-block" />
                 </div>
@@ -134,21 +134,26 @@ export default Vue.extend({
             }
             try {
                 const url = new URL(this.currentMedia as string, window.location.origin);
-                if (url.hostname.includes("youtu.be")) {
-                    // For shortened YouTube URLs, the video ID is in the pathname
-                    const id = url.pathname.slice(1);
-                    if (id) {
-                        return "https://www.youtube.com/embed/" + id + "?autoplay=1";
-                    }
+                const hostname = url.hostname.replace(/^www\./, "");
+                // Already an embed URL, just need to add autoplay
+                if (hostname === "youtube.com" && url.pathname.startsWith("/embed/")) {
+                    return url.href + "?autoplay=1";
                 }
-                if (url.hostname.includes("youtube.com") || url.hostname.includes("youtube.com")) {
-                    // Retrieve video ID from v= parameter for standard YouTube URLs
+                if (hostname === "youtube.com") {
+                    // Standard youtube urls copied and pasted from link
                     const id = url.searchParams.get("v");
                     if (id) {
-                        return "https://www.youtube.com/embed/" + id + "?autoplay=1";
+                        return `https://www.youtube.com/embed/${id}?autoplay=1`;
                     }
                 }
-            }
+                if (hostname === "youtu.be") {
+                    // Shortened URLs often used when sharing YouTube links.
+                    const id = url.pathname.slice(1);
+                    if (id) {
+                        return `https://www.youtube.com/embed/${id}?autoplay=1`;
+                    }
+                }
+            } 
             catch (e) {
                 console.warn("Invalid URL:", this.currentMedia, e);
             }

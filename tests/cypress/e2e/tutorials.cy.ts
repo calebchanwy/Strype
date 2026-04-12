@@ -258,3 +258,78 @@ describe("Not reaching expected outcome in tutorial shows failure message", () =
         cy.contains("#appSimpleMsgModalDlg").should("not.exist");
     });
 });
+
+describe("Embedded image in tutorial step", () => {
+    it("Displays an embedded image in a tutorial step", () => {
+        if (Cypress.env("mode") == "microbit") {
+            return;
+        }
+        // Load the fixture with an embedded image
+        loadTutorialFile("tests/cypress/fixtures/tutorial-media.spy");
+        // Check the image is rendered with the correct src
+        cy.get("#tutorial-media img").should("have.attr", "src").and("include", "https://strype.org/images/editor_snapshot.png");
+    });
+});
+
+describe("Embedded video in tutorial step", () => {
+    it("Displays an embedded video in a tutorial step", () => {
+        if (Cypress.env("mode") == "microbit") {
+            return;
+        }
+        // Load the fixture with an embedded video
+        loadTutorialFile("tests/cypress/fixtures/tutorial-media.spy");    
+        cy.contains(".btn", "Next").click();
+        cy.wait(100);    
+        // Check the video element is rendered with the correct src
+        cy.get("#tutorial-media video").should("have.attr", "src").and("include", "https://www.w3schools.com/html/mov_bbb.mp4");
+    });
+});
+
+
+describe("Non-embedded youtube video in tutorial step", () => {
+    it("Displays an embedded youtu.be video in a tutorial step", () => {
+        if (Cypress.env("mode") == "microbit") {
+            return;
+        }
+        // Load the fixture with an embedded shortened YouTube video
+        loadTutorialFile("tests/cypress/fixtures/tutorial-media.spy");
+        for (let i = 0; i < 2; i++) {
+            cy.contains(".btn", "Next").click();
+            cy.wait(100);
+        }
+        // Check the iframe element is rendered with the correct src
+        cy.get("#tutorial-media iframe").should("have.attr", "src").and("include", "https://www.youtube.com/embed/xTBnZwv9LBk?autoplay=1");
+    });
+});
+
+describe("Embedded youtube.com video in tutorial step", () => {
+    it("Displays an embedded YouTube video in a tutorial step", () => {
+        if (Cypress.env("mode") == "microbit") {
+            return;
+        }
+        // Load the fixture with an embedded YouTube video
+        loadTutorialFile("tests/cypress/fixtures/tutorial-media.spy");
+        for (let i = 0; i < 3; i++) {
+            cy.contains(".btn", "Next").click();
+            cy.wait(100);
+        }
+        // Check the iframe element is rendered with the correct src
+        cy.get("#tutorial-media iframe").should("have.attr", "src").and("include", "https://www.youtube.com/embed/xTBnZwv9LBk?si=hUQWQq-zW8EUnfiE?autoplay=1");
+    });
+});
+
+describe("Embedded iframe in tutorial step", () => {
+    it("Displays an embedded iframe in a tutorial step", () => {
+        if (Cypress.env("mode") == "microbit") {
+            return;
+        }
+        // Load the fixture with an embedded iframe
+        loadTutorialFile("tests/cypress/fixtures/tutorial-media.spy");
+        for (let i = 0; i < 4; i++) {
+            cy.contains(".btn", "Next").click();
+            cy.wait(100);
+        }
+        // Check the iframe element is rendered with the correct src
+        cy.get("#tutorial-media iframe").should("have.attr", "src").and("include", "https://www.example.com");
+    });
+});
