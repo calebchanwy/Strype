@@ -1,8 +1,8 @@
 <template>
     <ModalDlg :dlgId="dlgId" :dlgTitle="currentTitle" :okOnly="true">
         <div class="help-content">
-            <div v-html="currentContent"></div>
-            <img v-if="currentGif" :src="currentGif" style="max-width: 100%; margin-top: 10px;"/>
+            <div id="help-content" v-html="currentContent"></div>
+            <img id="help-gif" v-if="currentGif" :src="currentGif" style="max-width: 100%; margin-top: 10px;"/>
         </div>
             <template #modal-footer-content="{ ok }">
                 <div class="d-flex align-items-center justify-content-between w-100">
