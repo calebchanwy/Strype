@@ -72,7 +72,7 @@ describe("Tutorial dialog", () => {
         cy.wait(500);
         // Check part of the code actually shows:
         cy.contains(".tutorial-step-title","Welcome to Strype!").should("exist");
-        cy.contains(".tutorial-step-desc","Follow this tutorial to get yourself familiar with Strype").should("exist");
+        cy.contains(".tutorial-step-desc","Watch this short video introducing Strype and frame based development. After watching the video, we will introduce the different parts of the user interface.").should("exist");
     });
 });
 
