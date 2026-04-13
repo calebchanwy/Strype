@@ -30,7 +30,7 @@
                     <iframe :src="source" class="embed-responsive-item" frameborder="0" allow="autoplay"></iframe>
                 </div>
             </div>
-            <div class="col-md-7">
+            <div :class="currentMedia ? 'col-md-7' : 'col-md-12'">
                 <div class="tutorial-step-body">
                     <div class="tutorial-step-title bold">{{ currentStep.title }}</div>
                     <div class="tutorial-step-desc" v-html="currentStep.description"></div>
