@@ -11,6 +11,62 @@ License
 
 This repository contains the source code for Strype, licensed under the AGPLv3 (see [LICENSE.txt](LICENSE.txt)).  You can use and modify the code according to that license, but be aware that the Strype name, logo, and other visual assets belong to the Strype team.
 
+Tutorials
+---
+This repository focuses on adding an inbuilt tutorial system to Strype as part of the final year project.
+The Strype tutorial system aims to make onboarding smoother for Strype users and provides a framework for teachers to create their own custom tutorials for students to load.
+
+### Features
+1. Selection of pre-built tutorials for new users to choose from, including Strype onboarding and basic Python projects.
+2. Import and export tutorials as `.spy` files, to easily share with students.
+3. Step-by-step interactive tutorial panel built within the editor.
+4. Apply highlights (stencils) over U.I. components to focus user attention.
+5. Set expected outcomes and code structure for students to reach.
+6. Always accessible help modal for Strype quick tips and refreshers.
+
+### File Syntax
+Strype tutorials are contained in a section within `.spy` files, identified by `#(=> Section:Tutorial`, expressed in `YAML` format.
+
+A tutorial consists of a collection of steps, where each step is described with:
+- title 
+    - Short summary of a given step.
+- description
+    - Describes a step, outlining more detail about the specific instruction.
+- media (optional)
+    - URL or link to file to be embedded into the step.
+    - Options: Image file, Video file, YouTube link or generic embed link.
+- requiredComponents (optional)
+    - A list of required code statements and their required counts that a user must meet before progressing to next step of the tutorial.
+    - Options: `funccall`, `import`, `classdef`, `funcdef`, `varassign`, `return` etc. Full list of identifiers can be found at [src/types/types.ts](src/types/types.ts).
+- stencil (optional)
+    - Applies a highlight affect to one or more U.I. components, dimming all other components.
+    - Options: `menu`, `tutorial`, `documentation`, `imports`, `definitions`, `mainCode`, `commands`, `pea`, `editor`. These are defined under [src/helpers/editor.ts](src/helpers/editor.ts).
+
+If a final console output is expected, `expectedOutput` and `expectedOutputMessage` can be defined.
+When the `expectedOutput` is reached, the `expectedOutputMessage` is displayed in a pop-up to notify users.
+
+Example Tutorial Project File (`.spy`):
+``` yaml
+#(=> Strype:1:std
+'''Variables and printing'''
+#(=> Section:Tutorial
+expectedOutput: "47"
+expectedOutputMessage: "Nice — variable assignment and print worked!"
+steps:
+- title: "Create variable"
+  description: "Assign a number to a variable and print it using the print function. For example: message = 47\nprint(message)"
+  stencil: mainCode
+  requiredComponents:
+    varassign: 1
+    funccall: 1
+  media: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/250px-Python-logo-notext.svg.png?_=20250701090410
+#(=> Section:Imports
+#(=> Section:Definitions
+#(=> Section:Main
+#(=> Section:End
+
+```
+
 Building and running
 ---
 
@@ -28,6 +84,9 @@ If you want to create a packaged version to distribute or host somewhere, run:
 ```
 npm run build
 ```
+
+A publicly available demo link deployed to GitHub pages can be found here: [Demo Deployment](https://calebchanwy.github.io/Strype/).
+If the above link does not work, deployment runs can be found here: [GitHub Pages Deployments](https://github.com/calebchanwy/Strype/deployments/github-pages) 
 
 Strype is currently an entirely client-side tool; there is no server component to run alongside.
 
