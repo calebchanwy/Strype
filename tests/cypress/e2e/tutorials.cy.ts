@@ -94,7 +94,7 @@ describe("Tutorial navigation", () => {
         cy.contains(".btn", "Next").click();
         cy.contains(".tutorial-step-title", "First Steps").should("exist");
         // Click previous and check we go back to the first step
-        cy.contains(".btn", "Prev").click();
+        cy.contains(".btn", "Previous").click();
         cy.contains(".tutorial-step-title", "Welcome!").should("exist");
     });
 });

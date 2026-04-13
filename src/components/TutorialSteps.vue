@@ -50,7 +50,7 @@
                     {{ componentMessage }}
                 </div>
                 <div class="tutorial-nav">
-                    <button type="button" class="btn btn-secondary" @click="prevStep" :disabled="currentIndex <= 0">Prev</button>
+                    <button type="button" class="btn btn-secondary" @click="prevStep" :disabled="currentIndex <= 0">Previous</button>
                     <button type="button" class="btn btn-primary ml-2" @click="nextStep" :disabled="(currentIndex < steps.length - 1 && !requiredComponentsReached)">
                         {{ currentIndex === steps.length - 1 ? 'Finish' : 'Next' }}
                     </button>
