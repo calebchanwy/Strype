@@ -353,3 +353,12 @@ describe("Tests loading/saving projects with required components", () => {
         testRoundTripImportAndDownload("tests/cypress/fixtures/tutorial-required-components.spy");
     });
 });
+
+describe("Tests loading/saving projects with media", () => {
+    if (Cypress.env("mode") === "microbit") {
+        return;
+    }
+    it("Loads/saves a project with required components", () => {
+        testRoundTripImportAndDownload("tests/cypress/fixtures/tutorial-media.spy");
+    });
+});
