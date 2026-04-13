@@ -1,16 +1,48 @@
 #(=> Strype:1:std
 '''Variables and printing'''
 #(=> Section:Tutorial
-expectedOutput: "42"
+expectedOutput: "47"
 expectedOutputMessage: "Nice — variable assignment and print worked!"
 steps:
 - title: "Create variable"
-  description: "Assign a number to a variable and print it."
+  description: "Assign a number to a variable and print it using the print function. For example: message = 47\nprint(message)"
   stencil: mainCode
   requiredComponents:
     varassign: 1
     funccall: 1
   media: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/250px-Python-logo-notext.svg.png?_=20250701090410
+
+- title: "Run the program"
+  description: "Run your code and check the program output area. Make sure the printed value appears as expected (47)."
+  stencil: mainCode, pea
+
+- title: "Change the value"
+  description: "Try changing the number stored in the variable to another value (for example 34) and run again to see the updated output."
+  stencil: mainCode, pea
+  requiredComponents:
+    varassign: 1
+
+- title: "Simple arithmetic"
+  description: "Use arithmetic with your variable. For example: a = 40\nb = 7\nprint(a + b) — this should print 47. Play around with subtraction, multiplication, and division."
+  stencil: mainCode, pea
+  requiredComponents:
+    varassign: 2
+    funccall: 1
+
+- title: "Store expressions"
+  description: "Store the result of an expression in a variable and print it: total = a + b\nprint(total). This shows how variables can hold computed values."
+  stencil: mainCode, pea
+  requiredComponents:
+    varassign: 1
+    funccall: 1
+
+- title: "Format the message"
+  description: "Put the number into a longer message: message = f\"The answer is {total}\"\nprint(message). This introduces f-strings for simple formatting."
+  stencil: mainCode, pea
+  requiredComponents:
+    varassign: 1
+    funccall: 1
+
 #(=> Section:Imports
 #(=> Section:Definitions
 #(=> Section:Main
