@@ -5,8 +5,9 @@ expectedOutput: ""
 expectedOutputMessage:
 steps:
 - title: "Welcome to Strype!"
-  description: "Follow this tutorial to get yourself familiar with Strype"
+  description: "Watch this short video introducing Strype and frame based development. After watching the video, we will introduce the different parts of the user interface."
   stencil: tutorials
+  media: https://www.youtube.com/watch?v=xTBnZwv9LBk&t=1s
 - title: "Main Editor"
   description: "This is the main code editor"
   stencil: editor

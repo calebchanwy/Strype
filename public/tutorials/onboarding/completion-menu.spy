@@ -1,0 +1,26 @@
+#(=> Strype:1:std
+'''A tutorial on Strype's auto completion and context menu features'''
+#(=> Section:Tutorial
+steps:
+- title: "Code faster with code completion"
+  description: "Watch this short video introducing Strype's code completion"
+  stencil: tutorial
+  media: https://www.youtube.com/watch?v=VADpx6OmpFI&t=1s
+- title: "Try It Out!"
+  description: "Add a new function call. Once added, type out 'pri' then Ctrl + Space to see suggested completion."
+  stencil: mainCode
+  requiredComponents:
+    funccall: 1
+- title: "Using the Context Menu"
+  description: "Get useful shortcuts for frames with your mouse"
+  stencil: tutorial
+  media: https://youtu.be/CVuxvLZhhmo?si=gi8-iqAFTTwX-R91
+- title: "Duplicate a frame"
+  description: "Using the context menu, duplicate the function frame"
+  stencil: mainCode
+  requiredComponents:
+    funccall: 2
+#(=> Section:Imports
+#(=> Section:Definitions
+#(=> Section:Main
+#(=> Section:End
