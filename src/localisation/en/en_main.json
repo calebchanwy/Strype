@@ -287,7 +287,9 @@
     "missingComponents": "You are missing some components. See the list above for what is left to do.",
     "nextStepError": "You must code the required components before moving to the next step.",
     "openProject" : "Open project",
-    "expectedOutcomeNotReached": "Failed to reach expected output, try again!"
+    "expectedOutcomeNotReached": "Failed to reach expected output, try again!",
+    "openTutorialTitle": "Explore Our Tutorials!",
+    "openTutorialMessage": "Try one of our interactive tutorials to learn more about Strype's features and how to use them."
   },
   "shortcut": {
     "delete": "Delete",
