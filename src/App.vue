@@ -1709,7 +1709,7 @@ body.#{$strype-classname-dragging-frame} {
     right: 0;
     bottom: 0;
     background: rgba(0,0,0,0.5);
-    z-index: 1000;
+    z-index: 600;
     pointer-events: auto;
 }
 .stencil-overlay-inactive {
@@ -1720,7 +1720,7 @@ body.#{$strype-classname-dragging-frame} {
 
 .stencil-highlight {
     position: relative;
-    z-index: 1100 !important;
+    z-index: 650 !important;
     box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
     border-radius: 4px;
     transition: box-shadow 0.20s ease, transform 0.20s ease;
