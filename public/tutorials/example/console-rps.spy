@@ -4,10 +4,13 @@
 steps:
 - title: "Welcome!"
   description: "In this tutorial we'll build a simple Rock–Paper–Scissors console game in Python. The player will compete against the computer with clear rules and input validation."
+  media: ./demos/console/console-rps.png
 - title: "Game Rules"
   description: "Rock beats scissors, scissors beats paper, and paper beats rock. If both players choose the same move, the round is a tie."
 - title: "Importing Random"
   description: "Import the random module so the computer can choose moves at random using `random.choice`."
+  requiredComponents:
+    import: 1
 - title: "Reading and Validating Input"
   description: "Implement `get_user_choice()` to prompt the player, normalize input to lowercase, and keep asking until a valid choice ('rock', 'paper', 'scissors') is entered."
 - title: "Computer Move"

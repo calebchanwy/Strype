@@ -5,10 +5,28 @@ expectedOutput: "Hello, world!"
 expectedOutputMessage: "Great start! Output matches the expected result!"
 steps:
 - title: "Hello"
-  description: "Print Hello, world! to the console."
+  description: "Print Hello, world! to the console. Use the print function to display the exact text: Hello, world!."
+  stencil: mainCode
+  media: ./tutorials/example/hello-world.jpg
+  requiredComponents:
+    funccall: 1
+
+- title: "Run it"
+  description: "Run the program to see the output in the console. If you don't see anything, check the run button or the console area."
+  stencil: mainCode, pea
+
+- title: "Change the message"
+  description: "Try changing the printed text to something else, for example: Hello, Strype!. Run again to see your change. This helps understand how editing the code affects output."
   stencil: mainCode
   requiredComponents:
     funccall: 1
+
+- title: "Use a variable"
+  description: "Store the message in a variable and print that variable. For example: message = 'Hello, world!'; print(message). This teaches using variables for dynamic output."
+  stencil: mainCode
+  requiredComponents:
+    variable: 1
+
 #(=> Section:Imports
 #(=> Section:Definitions
 #(=> Section:Main
