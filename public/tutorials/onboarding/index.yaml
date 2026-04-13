@@ -13,6 +13,11 @@
   image: favicon.png
   file: keyboard-commands.spy
 
+- name: Code Completion & Context Menu
+  description: How to use Strype's code completion features and context menu to speed up your workflow.
+  image: favicon.png
+  file: completion-menu.spy
+
 - name: Using the Console
   description: How to use Strype's console to run Python code and interact with your design.
   image: favicon.png

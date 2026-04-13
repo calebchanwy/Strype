@@ -14,7 +14,7 @@ steps:
   media: https://www.youtube.com/watch?v=9NPulhoXxmk
 - title: "Moving Frames"
   description: "Use your mouse to drag and drop frames between sections of your code, or hold shift + arrow keys to move frames. Alternatively, use the context menu or keyboard shortcuts to copy and paste frames."
-  stencil: mainCode
+  stencil: editor
   media: https://www.youtube.com/watch?v=yT4Aryq07EA&list=PLOTfsa8X9FM6HeT2zj8ZKNO9T-YSqBaF4&index=3
 - title: "Editing a frame"
   description: "Use your arrow keys or your mouse to navigate into a frame's slot to edit it's content"
