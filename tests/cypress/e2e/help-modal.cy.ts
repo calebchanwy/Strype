@@ -67,16 +67,41 @@ describe("Navigation loops back to start/end of help modal", () => {
         cy.get("#helpModalDlg").within(() => {
             const numEntries = helpEntries.length;
             for (let i = 1; i < numEntries + 1; i++) {
-                const re = new RegExp(`^${i} / ${numEntries}$`);
+                const re = new RegExp(`^${i} / ${numEntries + 1}$`);
                 cy.get(".help-nav-counter").invoke("text").should("match", re);
                 cy.get("button[aria-label='Next']").click();
                 cy.wait(100);   
             }
-            // Check we"re back at the start
+            // Click next again (final page leads user to tutorial)
+            cy.get("button[aria-label='Next']").click();
+            // Check we're back at the start
             cy.contains(helpEntries[0].title as string).should("exist");
-            const re = new RegExp(`^1 / ${numEntries}$`);
+            const re = new RegExp(`^1 / ${numEntries + 1}$`);
             cy.get(".help-nav-counter").invoke("text").should("match", re);
         });
+    });
+});
+
+describe("Help modal contains a link to the tutorial", () => {
+    it("Contains a link to the tutorial on the final page", () => {
+        cy.visit("./");
+        cy.get("button[aria-label='Help']").click();
+        cy.wait(100);
+        cy.get("#helpModalDlg").within(() => {
+            const numEntries = helpEntries.length;
+            // navigate to the final page
+            for (let i = 0; i < numEntries; i++) {
+                cy.get("button[aria-label='Next']").click();
+                cy.wait(100);   
+            }
+            // Check contains tutorial title, message and button to tutorial
+            cy.get(".modal-title").contains(i18n.t("tutorials.openTutorialTitle") as string).should("exist");
+            cy.get(".modal-body").contains(i18n.t("tutorials.openTutorialMessage") as string).should("exist");
+            // Check clicking open tutorial button opens tutorial dialog
+            cy.get("#open-tutorials-btn").contains("Open Tutorials").click();
+            cy.wait(100);
+        });
+        cy.get("#load-strype-tutorial-modal-dlg").should("exist");
     });
 });
 

@@ -1,8 +1,15 @@
 <template>
     <ModalDlg :dlgId="dlgId" :dlgTitle="currentTitle" :okOnly="true">
         <div class="help-content">
-            <div id="help-content" v-html="currentContent"></div>
-            <img id="help-gif" v-if="currentGif" :src="currentGif" style="max-width: 100%; margin-top: 10px;"/>
+            <div v-if="currentEntry.key !== 'open_tutorial'">
+                <div id="help-content" v-html="currentContent"></div>
+                <img id="help-gif" v-if="currentGif" :src="currentGif" style="max-width: 100%; margin-top: 10px;"/>
+            </div>
+            <!-- Final page: invitation to explore other tutorials -->
+            <div v-else>
+                <div class="mb-3">{{ currentContent }}</div>
+                <button id="open-tutorials-btn" class="btn btn-primary" @click="openTutorialDialog">Open Tutorials</button>
+            </div>
         </div>
             <template #modal-footer-content="{ ok }">
                 <div class="d-flex align-items-center justify-content-between w-100">
@@ -58,13 +65,23 @@ export default Vue.extend({
                 if(keys.length === 0) {
                     return [];
                 }
-                return keys.map((k) => {
+                const list = keys.map((k) => {
                     const title = this.$t(`help.${k}.title`) as string;
                     const raw = this.$t(`help.${k}.content`) as string;
                     const content = (raw ?? "").toString().replace(/\n/g, "<br/>");
                     const gif = `graphics_images/${k}.gif`;
                     return { key: k, title, content, gif } as HelpEntry;
                 });
+
+                // Add a final page that invites the user to explore tutorials.
+                list.push({
+                    key: "open_tutorial",
+                    title: (this.$t("tutorials.openTutorialTitle") as string),
+                    content: (this.$t("tutorials.openTutorialMessage") as string),
+                    gif: "",
+                } as HelpEntry);
+                console.log("Help entries loaded:", list);
+                return list;
             }
             catch (e) {
                 return [];
@@ -95,6 +112,11 @@ export default Vue.extend({
     },
 
     methods: {
+        openTutorialDialog() {
+            this.$root.$emit("open-load-tutorial");
+            this.$root.$emit("bv::hide::modal", this.dlgId);
+        },
+
         onHideModalDlg(event: any, id: string){
             if(id == this.dlgId && this.hideActionListener != undefined){
                 this.hideActionListener();
@@ -160,5 +182,12 @@ export default Vue.extend({
 .help-nav-counter{
     font-size:0.9em;
     color:#333;
+}
+#open-tutorials-btn{
+    background-color: #006600;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 </style>
