@@ -259,7 +259,20 @@ describe("Not reaching expected outcome in tutorial shows failure message", () =
     });
 });
 
-describe("Embedded image in tutorial step", () => {
+
+describe("Embedded local source image in tutorial step", () => {
+    it("Displays an embedded image in a tutorial step, from a local source", () => {
+        if (Cypress.env("mode") == "microbit") {
+            return;
+        }
+        // Load the fixture with an embedded image
+        loadTutorialFile("tests/cypress/fixtures/tutorial-media-local.spy");
+        // Check the image is rendered with the correct src
+        cy.get("#tutorial-media img").should("have.attr", "src").and("include", "./public/favicon.png");
+    });
+});
+
+describe("Embedded online source image in tutorial step", () => {
     it("Displays an embedded image in a tutorial step", () => {
         if (Cypress.env("mode") == "microbit") {
             return;
@@ -271,7 +284,21 @@ describe("Embedded image in tutorial step", () => {
     });
 });
 
-describe("Embedded video in tutorial step", () => {
+describe("Embedded local source video in tutorial step", () => {
+    it("Displays an embedded video in a tutorial step, from a local source", () => {
+        if (Cypress.env("mode") == "microbit") {
+            return;
+        }
+        // Load the fixture with an embedded video
+        loadTutorialFile("tests/cypress/fixtures/tutorial-media-local.spy");
+        cy.contains(".btn", "Next").click();
+        cy.wait(100);    
+        // Check the video is rendered with the correct src
+        cy.get("#tutorial-media video").should("have.attr", "src").and("include", "./test-http-assets/mov_bbb.mp4");
+    });
+});
+
+describe("Embedded online video in tutorial step", () => {
     it("Displays an embedded video in a tutorial step", () => {
         if (Cypress.env("mode") == "microbit") {
             return;

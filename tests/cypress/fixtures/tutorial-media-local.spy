@@ -1,0 +1,14 @@
+#(=> Strype:1:std
+'''An example tutorial with different types of media'''
+#(=> Section:Tutorial
+steps:
+- title: "Embedded image"
+  description: "Here is an image"
+  media: ./public/favicon.png
+- title: "Embedded Video"
+  description: "Here is a video"
+  media: ./test-http-assets/mov_bbb.mp4
+#(=> Section:Imports
+#(=> Section:Definitions
+#(=> Section:Main
+#(=> Section:End
