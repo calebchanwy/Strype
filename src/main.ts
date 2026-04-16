@@ -39,7 +39,6 @@ export const AppPlatform = appPlatform;
 // We declare the fake frame ID we used for it here.
 export const projectDocumentationFrameId = -10;
 
-
 let localeBuildDate = "";
 export function getLocaleBuildDate(): string {
     // This method returns the build date, set in vue.config.js.
