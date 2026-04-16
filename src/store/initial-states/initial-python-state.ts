@@ -27,7 +27,6 @@ const initialPythonState: EditorFrameObjects = {
         labelSlotsDict: {0: {slotStructures: {fields: [{code: "This is the default Strype starter project"}], operators: []}}},
         caretVisibility: CaretPosition.none,
     },
-    
     "-1": {
         id: -1,
         frameType : ImportsContainerDefinition,
