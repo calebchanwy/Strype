@@ -229,3 +229,25 @@ describe("Tests loading project descriptions", () => {
         testLoadingFromCalculatedShareLink("tests/cypress/fixtures/project-basic.spy");
     });
 });
+
+describe("Tests loading and saving projects that have tutorials", () => {
+    if (Cypress.env("mode") === "microbit") {
+        return;
+    }
+    it("Loads a project with instructional tutorials", () => {
+        testLoadingFromCalculatedShareLink("tests/cypress/fixtures/tutorial-instructional-steps.spy");
+    });
+    it("Loads a project with tutorial with expected outcome", () => {
+        testLoadingFromCalculatedShareLink("tests/cypress/fixtures/tutorial-expected-outcome.spy");
+    });
+    it("Loads a project with tutorial with stencils", () => {
+        testLoadingFromCalculatedShareLink("tests/cypress/fixtures/tutorial-stencils.spy");
+    });
+    it("Loads a project with tutorial with media", () => {
+        testLoadingFromCalculatedShareLink("tests/cypress/fixtures/tutorial-media.spy");
+        testLoadingFromCalculatedShareLink("tests/cypress/fixtures/tutorial-media-local.spy");
+    });
+    it("Loads a project with tutorial with required components", () => {
+        testLoadingFromCalculatedShareLink("tests/cypress/fixtures/tutorial-required-components.spy");
+    });
+});
