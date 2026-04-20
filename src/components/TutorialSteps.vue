@@ -163,10 +163,7 @@ export default Vue.extend({
             if (this.youtubeEmbedUrl) {
                 return this.youtubeEmbedUrl;
             }
-            if (this.isVideo) {
-                return this.currentMedia;
-            }
-            if (this.currentMedia) {
+            if (this.isVideo || this.isImage || this.currentMedia) {
                 return this.currentMedia;
             }
             console.warn("Unsupported media type or invalid URL:", this.currentMedia);
