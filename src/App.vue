@@ -109,7 +109,7 @@
         <ModalDlg :dlgId="confirmNewProjectModalDlgId" :useYesNo="true">
             <span style="white-space:pre-wrap" v-html="$t('appMessage.newProjectConfirmation')"></span>
         </ModalDlg>
-        <button class="editor-help-button no-print" @click="onHelpClick" aria-label="Help">Need Help?</button>
+        <button class="editor-help-button no-print" :class="{ 'editor-help-button--disabled': appStore.isContextMenuOpen || appStore.isDraggingFrame || appStore.isEditing}" @click="onHelpClick" aria-label="Help">Need Help?</button>
     </div>
 </template>
 
@@ -1788,6 +1788,11 @@ body.#{$strype-classname-dragging-frame} {
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     font-size: 16px;
 }
+
+.editor-help-button--disabled {
+  pointer-events: none;
+}
+
 .editor-help-button:focus {
     outline: none;
 }

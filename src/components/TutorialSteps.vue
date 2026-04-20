@@ -21,7 +21,7 @@
                     <img :src="currentMedia" class="img-fluid mx-auto d-block" />
                 </div>
                 <div v-else-if="isVideo" class="w-100 embed-responsive embed-responsive-16by9">
-                    <video :src="source" class="embed-responsive-item" autoplay></video>
+                    <video :src="source" class="embed-responsive-item" controls autoplay></video>
                 </div>
                 <div v-else-if="youtubeEmbedUrl" class="w-100 embed-responsive embed-responsive-16by9">
                     <iframe :src="source" class="embed-responsive-item" frameborder="0" allow="autoplay"></iframe>
@@ -163,10 +163,7 @@ export default Vue.extend({
             if (this.youtubeEmbedUrl) {
                 return this.youtubeEmbedUrl;
             }
-            if (this.isVideo) {
-                return this.currentMedia;
-            }
-            if (this.currentMedia) {
+            if (this.isVideo || this.isImage || this.currentMedia) {
                 return this.currentMedia;
             }
             console.warn("Unsupported media type or invalid URL:", this.currentMedia);
